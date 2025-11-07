@@ -1,0 +1,236 @@
+/* =====================
+   Variables y base
+   ===================== */
+:root{
+  --dur: .6s;
+  --delay: .12s;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --brand: #2d3e6b;
+  --bg: #f6f8ff;
+  --card: #ffffff;
+  --muted: #5a6477;
+  /* Acento sutil para detalles */
+  --accent: #22d4a3;
+}
+
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  font-family: system-ui, Arial, sans-serif;
+  background:
+    radial-gradient(800px 400px at 10% -10%, rgba(45,62,107,.08), transparent),
+    radial-gradient(700px 360px at 110% 0%, rgba(34,212,163,.08), transparent),
+    var(--bg);
+  color:#1c2233;
+}
+
+.wrap{ max-width: 1060px; margin:0 auto; padding: 0 14px }
+
+/* =====================
+   Topbar más sofisticada
+   ===================== */
+.topbar{
+  position:sticky; top:0; z-index:10;
+  background: linear-gradient(180deg, rgba(45,62,107,.98), rgba(45,62,107,.88));
+  color:#fff;
+  border-bottom:1px solid rgba(0,0,0,.2);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+.topbar .wrap{
+  display:flex; align-items:center; justify-content:space-between; padding:12px 0;
+}
+.topbar strong{
+  font-weight:800; letter-spacing:.3px; font-size:1.05rem;
+}
+
+/* Menú: distribución limpia y responsive */
+.menu{
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end;
+}
+.menu a{
+  color:#fff; text-decoration:none; font-weight:700; opacity:.95;
+  padding:8px 12px; border-radius:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), opacity .2s var(--ease), background .2s var(--ease);
+}
+.menu a:hover{
+  opacity:1;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  background: linear-gradient(135deg, #5b6bff, var(--accent));
+  color:#0b1020;
+}
+
+/* =====================
+   Utilidades
+   ===================== */
+.panel{
+  background: var(--card);
+  border:1px solid #e7eaf2;
+  border-radius:14px;
+  padding:18px;
+  margin:18px 0;
+  box-shadow: 0 12px 26px rgba(25,35,52,.08);
+}
+.nota{ color:var(--muted); font-size:14px }
+.fila{ display:flex; gap:10px; flex-wrap:wrap; align-items:center }
+
+/* Botones con gradiente sutil */
+.btn{
+  background: linear-gradient(135deg, var(--brand), #3f5494);
+  color:#fff; border:none; padding:10px 14px; border-radius:10px; cursor:pointer;
+  font-weight:700; letter-spacing:.2px;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .25s var(--ease);
+  box-shadow: 0 10px 18px rgba(63,84,148,.18);
+}
+.btn:hover{ transform: translateY(-2px); box-shadow: 0 14px 26px rgba(63,84,148,.25); filter: brightness(1.03) }
+.btn:active{ transform: translateY(0) scale(.98) }
+
+.def{ line-height:1.65 }
+.toast{
+  opacity:0; transform: translateY(8px);
+  background:#0f1220; color:#fff; padding:6px 10px; border-radius:8px; display:inline-block;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+/* =====================
+   Transiciones demo
+   ===================== */
+.demo-trans.zoom:hover{ transform: scale(1.08) }
+.demo-trans.desplazar:hover{ transform: translateY(-4px) }
+/* color con gradiente */
+.demo-trans.color{
+  background: linear-gradient(135deg, #3a4b8f, #556aa6);
+}
+.demo-trans.color:hover{
+  background: linear-gradient(135deg, #7ab8ff, #4f79ff);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(80,120,255,0.35);
+  transform: translateY(-2px);
+}
+
+
+/* =====================
+   Keyframes demo
+   ===================== */
+@keyframes aparecer{ from{opacity:0; transform: translateY(12px)} to{opacity:1; transform:none} }
+@keyframes latir{ 0%{transform:scale(1)} 50%{transform:scale(1.08)} 100%{transform:scale(1)} }
+@keyframes flotar{ 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+.caja{
+  width:120px; height:80px; display:grid; place-content:center;
+  border-radius:12px; background: linear-gradient(180deg, #eef3ff, #e8eeff);
+  border:1px solid #dfe6ff;
+}
+.fade-in{ animation: aparecer var(--dur) var(--ease) both }
+.latir{ animation: latir 1.4s ease-in-out infinite }
+.flotar{ animation: flotar 3s ease-in-out infinite }
+
+/* =====================
+   Disney demo bloques
+   ===================== */
+.bloque{
+  width:150px; height:80px;
+  background: linear-gradient(180deg, #e9efff, #dfe6ff);
+  border:1px solid #cfd8ff; display:grid; place-content:center; border-radius:12px; font-weight:700
+}
+.bloque.anticipation{ animation: ant 600ms var(--ease) both }
+@keyframes ant{ 0%{transform:scale(.92)} 60%{transform:scale(1.06)} 100%{transform:scale(1)} }
+.bloque.squash{ animation: sq 420ms cubic-bezier(.2,.6,.2,1.4) both }
+@keyframes sq{ 0%{transform:scale(1,1)} 50%{transform:scale(1.12,.9)} 100%{transform:scale(1,1)} }
+.bloque.follow{ animation: fol 600ms cubic-bezier(.2,.8,.2,1) both }
+@keyframes fol{ 0%{transform:translateY(0)} 70%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
+
+/* =====================
+   Galería
+   ===================== */
+.grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px }
+.card{
+  border:1px solid #e7eaf2; border-radius:14px; overflow:hidden; background:#fff;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .25s var(--ease)
+}
+.card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 16px 28px rgba(0,0,0,.12) }
+.thumb{
+  height:110px; display:grid; place-content:center;
+  background: linear-gradient(135deg, #d8e1ff, #eef3ff);
+  font-weight:800; letter-spacing:.3px; color:#2a3450;
+}
+.contenido{ padding:12px }
+.meta{ padding:10px; display:flex; justify-content:flex-end }
+.mini{
+  background:#ffe3ec; border:1px solid #ffc6d8; color:#b61c50; border-radius:999px;
+  padding:5px 10px; cursor:pointer; transition: transform .15s ease; font-weight:700
+}
+.mini:active{ transform: scale(.96) }
+
+/* Comportamientos distintos */
+.card[data-behavior="zoom"]:hover{ transform: translateY(-6px) scale(1.03) }
+.card[data-behavior="rotate"]:hover{ transform: rotate(1.2deg) }
+.card[data-behavior="color"]:hover .thumb{
+  background: linear-gradient(135deg, var(--accent), #6ea2ff);
+  color: #0b1020;
+  box-shadow: inset 0 0 18px rgba(34,212,163,0.3), 0 6px 16px rgba(34,212,163,0.3);
+  transform: scale(1.05);
+}
+.card[data-behavior="lift"]:hover{ transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,.16) }
+
+/* Tarjeta que revela info extra con keyframes */
+.card[data-behavior="reveal"] .contenido{ position:relative }
+.card[data-behavior="reveal"] .contenido::after{
+  content: "Detalle revelado";
+  position:absolute; left:12px; bottom:10px; background:#0f1220; color:#fff; font-size:12px; padding:4px 8px; border-radius:8px;
+  opacity:0; transform: translateY(6px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+  border:1px solid rgba(255,255,255,.12);
+}
+.card[data-behavior="reveal"]:hover .contenido::after{ opacity:1; transform: translateY(0) }
+
+/* Tarjeta que abre modal */
+.card[data-behavior="modal"]{ cursor:pointer }
+.card[data-behavior="modal"]:hover{ transform: translateY(-4px) scale(1.02) }
+
+/* =====================
+   Formulario
+   ===================== */
+@keyframes sacudir{ 0%{transform:translateX(0)} 25%{transform:translateX(-6px)} 50%{transform:translateX(6px)} 75%{transform:translateX(-4px)} 100%{transform:translateX(0)} }
+input[type="email"]{
+  flex:1; padding:10px; border:1px solid #cfd7ea; border-radius:10px;
+  background:#fff; color:#1c2233;
+  transition: box-shadow .2s var(--ease), border-color .2s var(--ease);
+}
+input[type="email"]::placeholder{ color:#9aa4bb }
+input.error{ border-color:#ff5f7a !important; animation: sacudir .32s cubic-bezier(.36,.07,.19,.97) }
+
+/* =====================
+   Modal + GSAP
+   ===================== */
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; padding:10px }
+.modal{
+  width:min(780px,96%); background:#fff;
+  border:1px solid #e7eaf2; border-radius:14px; overflow:hidden; opacity:0; transform: scale(.94);
+  box-shadow: 0 22px 50px rgba(0,0,0,.18);
+}
+.modal-head{ display:flex; align-items:center; justify-content:space-between; padding:12px; background:#eff2f9; border-bottom:1px solid #e7eaf2 }
+.modal-banner{ height:120px; background:linear-gradient(45deg, #6ea2ff, var(--accent)) }
+.cerrar{
+  background: linear-gradient(135deg, var(--brand), #3f5494);
+  color:#fff; border:none; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:800
+}
+
+/* =====================
+   Reveal al hacer scroll
+   ===================== */
+.appear{ opacity:0; transform: translateY(14px) }
+
+/* =====================
+   Responsive
+   ===================== */
+@media (max-width:860px){ .grid{ grid-template-columns:1fr 1fr } }
+@media (max-width:560px){
+  .grid{ grid-template-columns:1fr }
+  .menu{ justify-content:center }
+  .menu a{ padding:6px 10px; font-size:.95rem }
+}
